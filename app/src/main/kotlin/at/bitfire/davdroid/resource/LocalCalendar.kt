@@ -147,7 +147,9 @@ class LocalCalendar private constructor(
          * When a calendar component is created, its sequence number is 0. It is monotonically incremented by the "Organizer's"
          * CUA each time the "Organizer" makes a significant revision to the calendar component.
          */
-        for (localEvent in queryEvents("${Events.DIRTY} AND ${Events.ORIGINAL_ID} IS NULL", null)) {
+
+//        var queryEvents = queryEvents("${Events.DIRTY} AND ${Events.ORIGINAL_ID} IS NULL", null)
+        for (localEvent in queryEvents(null, null)) {
             try {
                 val event = requireNotNull(localEvent.event)
 
