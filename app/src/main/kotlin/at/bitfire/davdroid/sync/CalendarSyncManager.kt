@@ -97,7 +97,7 @@ class CalendarSyncManager @AssistedInject constructor(
     override fun queryCapabilities(): SyncState? =
         SyncException.wrapWithRemoteResource(collection.url) {
             var syncState: SyncState? = null
-            davCollection.propfind(0, MaxResourceSize.NAME, SupportedReportSet.NAME, GetCTag.NAME, SyncToken.NAME) { response, relation ->
+            davCollection.propfind(0, SupportedReportSet.NAME, GetCTag.NAME, SyncToken.NAME) { response, relation ->
                 if (relation == Response.HrefRelation.SELF) {
                     response[MaxResourceSize::class.java]?.maxSize?.let { maxSize ->
                         logger.info("Calendar accepts events up to ${Formatter.formatFileSize(context, maxSize)}")

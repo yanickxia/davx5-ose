@@ -164,7 +164,7 @@ class ContactsSyncManager @AssistedInject constructor(
     override fun queryCapabilities(): SyncState? {
         return SyncException.wrapWithRemoteResource(collection.url) {
             var syncState: SyncState? = null
-            davCollection.propfind(0, MaxResourceSize.NAME, SupportedAddressData.NAME, SupportedReportSet.NAME, GetCTag.NAME, SyncToken.NAME) { response, relation ->
+            davCollection.propfind(0, SupportedAddressData.NAME, SupportedReportSet.NAME, GetCTag.NAME, SyncToken.NAME) { response, relation ->
                 if (relation == Response.HrefRelation.SELF) {
                     response[MaxResourceSize::class.java]?.maxSize?.let { maxSize ->
                         logger.info("Address book accepts vCards up to ${Formatter.formatFileSize(context, maxSize)}")
